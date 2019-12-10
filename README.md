@@ -60,4 +60,4 @@ num.module.print()
 
 After use defer_require to require the module, use A.module to access to it.
 
-Using `A.module` is not elegant, if you know how to rewrite this feature and directly use `A`, please pull a request or post a issue. I will be very grateful. Thanks.
+Using `A.module` is not elegant, if you know how to rewrite this feature and directly use `A`, please push a pull request or post a issue. I will be very grateful. Thanks.
