@@ -1,31 +1,5 @@
 const path = require("path")
 
-class tmpClass {
-  constructor(path, callDir) {
-    if (typeof path !== "string") throw new TypeError("Invalid module path.")
-    if (typeof callDir !== "string") throw new TypeError("Invalid caller directory")
-    this.path = path.trim()
-    this.callDir = callDir.trim()
-  }
-
-  get moduleLazyGetter() {
-    delete this.moduleLazyGetter
-
-    let relativePath = this.path.length > 0 && this.path[0] === "."
-    console.log("ACCESS MODULE")
-    console.log(this.path)
-    console.log(this.callDir)
-    let targetModule = relativePath ? require(path.resolve(this.callDir, this.path)) : require(this.path)
-
-    Object.defineProperties(this, {
-      tmpGetter: {
-        value: targetModule
-      }
-    })
-    return targetModule
-  }
-}
-
 /**
  * get the directory where the caller in.
  */
@@ -55,10 +29,34 @@ function getCallerDirectory() {
   return path.dirname(callerfile)
 }
 
+class tmpClass {
+  constructor(path, callDir) {
+    if (typeof path !== "string") throw new TypeError("Invalid module path.")
+    if (typeof callDir !== "string") throw new TypeError("Invalid caller directory")
+    this.path = path.trim()
+    this.callDir = callDir.trim()
+    this.accessed = false
+  }
+
+  get module() {
+    delete this.module
+
+    let relativePath = this.path.length > 0 && this.path[0] === "."
+    let targetModule = relativePath ? require(path.resolve(this.callDir, this.path)) : require(this.path)
+
+    Object.defineProperties(this, {
+      tmpGetter: {
+        value: targetModule
+      }
+    })
+    return targetModule
+  }
+}
+
 function DRequire(path) {
   let callDir = getCallerDirectory()
   let tmp = new tmpClass(path, callDir)
-  return tmp.moduleLazyGetter
+  return tmp
 }
 
 module.exports = DRequire
