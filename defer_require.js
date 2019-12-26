@@ -44,10 +44,8 @@ class tmpClass {
     let relativePath = this.path.length > 0 && this.path[0] === "."
     let targetModule = relativePath ? require(path.resolve(this.callDir, this.path)) : require(this.path)
 
-    Object.defineProperties(this, {
-      tmpGetter: {
-        value: targetModule
-      }
+    Object.defineProperty(this, "module", {
+      value: targetModule
     })
     return targetModule
   }
