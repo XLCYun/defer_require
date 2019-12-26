@@ -1,0 +1,25 @@
+{
+  "name": "defer-require",
+  "version": "0.1.0",
+  "description": "Defer requirement until next time access to it.",
+  "main": "defer_require.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XLCYun/defer_require.git"
+  },
+  "keywords": [
+    "defer",
+    "deferred",
+    "require",
+    "node"
+  ],
+  "author": "XLCYun",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/XLCYun/defer_require/issues"
+  },
+  "homepage": "https://github.com/XLCYun/defer_require#readme"
+}
